@@ -7,6 +7,7 @@ use App\Exceptions\WrongCredentialException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -48,14 +49,21 @@ class Handler extends ExceptionHandler
             return response()->json([
                 'status' => 404,
                 'message' => 'Model Not Found',
-            ], 422);          
+            ], 404);          
         });
 
         $this->renderable(function (WrongCredentialException $e, $request) {
             return response()->json([
                 'status' => 403,
                 'message' => $e->getMessage(),
-            ], 422);          
+            ], 403);          
+        });
+
+        $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
+            return response()->json([
+                'status' => 405,
+                'message' => $e->getMessage(),
+            ], 403);          
         });
     }
 }

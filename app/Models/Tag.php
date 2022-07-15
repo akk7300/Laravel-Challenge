@@ -12,4 +12,6 @@ class Tag extends Model
     protected $fillable = [
         'value'
     ];
+
+    protected $hidden = ['pivot'];
 }
