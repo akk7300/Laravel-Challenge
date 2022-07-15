@@ -63,7 +63,7 @@ class Handler extends ExceptionHandler
             return response()->json([
                 'status' => 405,
                 'message' => $e->getMessage(),
-            ], 403);          
+            ], 405);          
         });
     }
 }
