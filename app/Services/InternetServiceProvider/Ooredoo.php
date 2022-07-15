@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Services\InternetServiceProvider;
+use App\Services\InternetServiceProvider\InternetServiceInterface;
 
-class Ooredoo extends Mpt
+class Ooredoo implements InternetServiceInterface
 {
     protected $operator = 'ooredoo';
     

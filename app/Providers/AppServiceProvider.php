@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use App\Http\Services\MptService;
-use App\Http\Services\OoredooService;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use App\Http\Services\InternetServiceInterface;
+use App\Services\InternetServiceProvider\Mpt;
+use App\Services\InternetServiceProvider\Ooredoo;
 use App\Http\Controllers\InternetServiceProviderController;
+use App\Services\InternetServiceProvider\InternetServiceInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,13 +20,13 @@ class AppServiceProvider extends ServiceProvider
     {
         if($this->app->request->getRequestUri() == '/api/mpt/invoice-amount'){
             $this->app->bind(InternetServiceInterface::class, function () {
-                return new MptService();
+                return new Mpt();
             });
         };
 
         if($this->app->request->getRequestUri() == '/api/ooredoo/invoice-amount'){
             $this->app->bind(InternetServiceInterface::class, function () {
-                return new OoredooService();
+                return new Ooredoo();
             });
         };
 

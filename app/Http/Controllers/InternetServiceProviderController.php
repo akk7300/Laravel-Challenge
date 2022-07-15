@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Services\MptService;
-use App\Http\Services\InternetServiceInterface;
+use App\Services\InternetServiceProvider\InternetServiceInterface;
 
 class InternetServiceProviderController extends Controller
 {
@@ -17,6 +17,8 @@ class InternetServiceProviderController extends Controller
 
     public function getMptInvoiceAmount(Request $request)
     {
+        $this->internetService->setMonth($request->get('month') ?: 1);
+
         $amount = $this->internetService->calculateTotalAmount();
         
         return response()->json([
@@ -26,6 +28,8 @@ class InternetServiceProviderController extends Controller
 
     public function getOoredooInvoiceAmount(Request $request)
     {
+        $this->internetService->setMonth($request->get('month') ?: 1);
+
         $amount = $this->internetService->calculateTotalAmount();
         
         return response()->json([

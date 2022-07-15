@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Services\InternetServiceProvider;
+use App\Services\InternetServiceProvider\InternetServiceInterface;
 
-class Mpt
+class Mpt implements InternetServiceInterface
 {
     protected $operator = 'mpt';
     
