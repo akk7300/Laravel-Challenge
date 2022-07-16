@@ -15,19 +15,12 @@ class InternetServiceProviderController extends Controller
         $this->internetService = $internetService;    
     }
 
-    public function getMptInvoiceAmount(Request $request)
+    public function getInvoiceAmount(Request $request)
     {
-        $this->internetService->setMonth($request->get('month') ?: 1);
-
-        $amount = $this->internetService->calculateTotalAmount();
-        
-        return response()->json([
-            'data' => $amount
+        $request->validate([
+            'type' => 'required'
         ]);
-    }
-
-    public function getOoredooInvoiceAmount(Request $request)
-    {
+        
         $this->internetService->setMonth($request->get('month') ?: 1);
 
         $amount = $this->internetService->calculateTotalAmount();

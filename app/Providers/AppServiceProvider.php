@@ -18,13 +18,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if($this->app->request->getRequestUri() == '/api/mpt/invoice-amount'){
+        if($this->app->request->type == 'mpt'){
             $this->app->bind(InternetServiceInterface::class, function () {
                 return new Mpt();
             });
         };
 
-        if($this->app->request->getRequestUri() == '/api/ooredoo/invoice-amount'){
+        if($this->app->request->type == 'ooredoo'){
             $this->app->bind(InternetServiceInterface::class, function () {
                 return new Ooredoo();
             });
