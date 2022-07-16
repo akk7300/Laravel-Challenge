@@ -23,6 +23,7 @@ Route::post('login', [LoginController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     
     Route::get('posts', [PostController::class, 'list']);
+    
     Route::post('posts/reaction', [PostController::class, 'toggleReaction']);
     
     Route::post('/operator/invoice-amount', [InternetServiceProviderController::class, 'getInvoiceAmount']);
@@ -30,4 +31,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('job/apply', [JobController::class, 'apply']);
     
     Route::post('staff/salary', [StaffController::class, 'payroll']);
+
 });

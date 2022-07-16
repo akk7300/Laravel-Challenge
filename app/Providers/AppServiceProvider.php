@@ -18,24 +18,25 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        switch ($this->app->request->type) {
 
-        if($this->app->request->type == 'mpt'){
-            $this->app->bind(InternetServiceInterface::class, function () {
-                return new Mpt();
-            });
-        }
+            case 'mpt':
+                $this->app->bind(InternetServiceInterface::class, function () {
+                    return new Mpt();
+                });
+              break;
 
-        elseif($this->app->request->type == 'ooredoo'){
-            $this->app->bind(InternetServiceInterface::class, function () {
-                return new Ooredoo();
-            });
+            case 'ooredoo':
+                $this->app->bind(InternetServiceInterface::class, function () {
+                    return new Ooredoo();
+                });
+              break;
+              
+            default:
+                $this->app->bind(InternetServiceInterface::class, function () {
+                    return new Mpt();
+                });
         }
-        else{
-            $this->app->bind(InternetServiceInterface::class, function () {
-                return new Mpt();
-            });
-        }
-        
     }
 
     /**
