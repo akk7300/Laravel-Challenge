@@ -16,11 +16,7 @@ class InternetServiceProviderController extends Controller
     }
 
     public function getInvoiceAmount(Request $request)
-    {
-        $request->validate([
-            'type' => 'required'
-        ]);
-        
+    {   
         $this->internetService->setMonth($request->get('month') ?: 1);
 
         $amount = $this->internetService->calculateTotalAmount();
